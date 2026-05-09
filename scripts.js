@@ -219,8 +219,22 @@ function salvarDados() {
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
+
   salvarDados();
+
   successModal.classList.add('show');
+
+  form.reset();
+
+  localStorage.removeItem('cadastroUsuario');
+
+  document.getElementById('rua').value = '';
+  document.getElementById('bairro').value = '';
+  cidadeSelect.innerHTML = '<option value="">Selecione um estado primeiro</option>';
+  cidadeSelect.disabled = true;
+  estadoSelect.value = '';
+  numeroInput.disabled = false;
+  limparMensagem();
 });
 
 fecharModal.addEventListener('click', () => {
