@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro de Usuários | ViaCEP</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page">
+    <section class="address-card">
+      <div class="card-header">
+        <h1>Cadastro de Usuário</h1>
+      </div>
+
+      <p class="intro-text">
+        Digite o CEP completo para preencher automaticamente logradouro, bairro, cidade e estado.
+        <span>Depois, complete os campos de número, complemento e ponto de referência.</span>
+      </p>
+
+      <form id="cadastroForm" class="form-grid">
+        <h2 class="section-title">Dados pessoais</h2>
+
+        <div class="form-group col-12">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" placeholder="Digite seu nome completo" />
+        </div>
+
+        <div class="form-group col-6">
+          <label for="telefone">Telefone</label>
+          <input type="tel" id="telefone" placeholder="(00) 90000-0000" maxlength="15" />
+        </div>
+
+        <div class="form-group col-6">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="seuemail@email.com" />
+        </div>
+
+        <h2 class="section-title">Endereço</h2>
+
+        <div class="col-12 cep-row">
+          <div class="form-group">
+            <label for="cep">CEP</label>
+            <input type="text" id="cep" maxlength="9" placeholder="00000-000" />
+          </div>
+
+          <div class="help-link">
+            <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank">
+              Não sei meu CEP
+            </a>
+          </div>
+        </div>
+
+        <div id="mensagemCep" class="message"></div>
+
+        <div class="form-group col-12">
+          <label for="rua">Rua/Avenida</label>
+          <input type="text" id="rua" placeholder="Logradouro" readonly />
+        </div>
+
+        <div class="form-group col-6">
+          <label for="numero">Número</label>
+          <div class="number-line">
+            <input type="text" id="numero" />
+            <label class="checkbox-line" for="semNumero">
+              <input type="checkbox" id="semNumero" />
+              Sem número
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group col-6">
+          <label for="complemento">Complemento opcional</label>
+          <input type="text" id="complemento" />
+        </div>
+
+        <div class="form-group col-6">
+          <label for="bairro">Bairro</label>
+          <input type="text" id="bairro" placeholder="Bairro" readonly />
+        </div>
+
+        <div class="form-group col-5">
+          <label for="cidade">Cidade</label>
+          <select id="cidade" disabled class="auto-filled">
+            <option value="">Selecione um estado primeiro</option>
+          </select>
+        </div>
+
+        <div class="form-group col-1">
+          <label for="estado">UF</label>
+          <select id="estado" class="auto-filled uf-select">
+            <option value="">UF</option>
+            <option value="AC">AC</option>
+            <option value="AL">AL</option>
+            <option value="AP">AP</option>
+            <option value="AM">AM</option>
+            <option value="BA">BA</option>
+            <option value="CE">CE</option>
+            <option value="DF">DF</option>
+            <option value="ES">ES</option>
+            <option value="GO">GO</option>
+            <option value="MA">MA</option>
+            <option value="MT">MT</option>
+            <option value="MS">MS</option>
+            <option value="MG">MG</option>
+            <option value="PA">PA</option>
+            <option value="PB">PB</option>
+            <option value="PR">PR</option>
+            <option value="PE">PE</option>
+            <option value="PI">PI</option>
+            <option value="RJ">RJ</option>
+            <option value="RN">RN</option>
+            <option value="RS">RS</option>
+            <option value="RO">RO</option>
+            <option value="RR">RR</option>
+            <option value="SC">SC</option>
+            <option value="SP">SP</option>
+            <option value="SE">SE</option>
+            <option value="TO">TO</option>
+          </select>
+        </div>
+
+        <div class="form-group col-12">
+          <label for="referencia">Ponto de referência</label>
+          <input type="text" id="referencia" placeholder="Nome de lugar ou descrição de fachada perto do endereço" />
+        </div>
+
+        <div class="actions">
+          <button type="submit">Salvar cadastro</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <div id="successModal" class="success-modal">
+    <div class="modal-box">
+      <h2>Cadastro realizado com sucesso!</h2>
+      <p>As informações foram salvas no navegador.</p>
+      <button type="button" id="fecharModal">Ok, entendi</button>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 Izabelly Nunes. Todos os direitos reservados.
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
