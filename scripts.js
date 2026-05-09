@@ -224,16 +224,27 @@ form.addEventListener('submit', (e) => {
 
   successModal.classList.add('show');
 
-  form.reset();
-
   localStorage.removeItem('cadastroUsuario');
 
+  form.reset();
+
+  document.getElementById('cep').value = '';
   document.getElementById('rua').value = '';
   document.getElementById('bairro').value = '';
+  document.getElementById('numero').value = '';
+  document.getElementById('complemento').value = '';
+  document.getElementById('referencia').value = '';
+  document.getElementById('nome').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('telefone').value = '';
+
+  estadoSelect.value = '';
   cidadeSelect.innerHTML = '<option value="">Selecione um estado primeiro</option>';
   cidadeSelect.disabled = true;
-  estadoSelect.value = '';
+
+  semNumero.checked = false;
   numeroInput.disabled = false;
+
   limparMensagem();
 });
 
