@@ -228,20 +228,30 @@ form.addEventListener('submit', (e) => {
 
   form.reset();
 
-  document.getElementById('cep').value = '';
-  document.getElementById('rua').value = '';
-  document.getElementById('bairro').value = '';
-  document.getElementById('numero').value = '';
-  document.getElementById('complemento').value = '';
-  document.getElementById('referencia').value = '';
+  // limpa inputs
   document.getElementById('nome').value = '';
   document.getElementById('email').value = '';
   document.getElementById('telefone').value = '';
+  document.getElementById('cep').value = '';
+  document.getElementById('rua').value = '';
+  document.getElementById('numero').value = '';
+  document.getElementById('complemento').value = '';
+  document.getElementById('bairro').value = '';
+  document.getElementById('referencia').value = '';
 
-  estadoSelect.value = '';
-  cidadeSelect.innerHTML = '<option value="">Selecione um estado primeiro</option>';
+  // limpa selects
+  estadoSelect.selectedIndex = 0;
+
+  cidadeSelect.innerHTML = `
+    <option value="">
+      Selecione um estado primeiro
+    </option>
+  `;
+
+  cidadeSelect.value = '';
   cidadeSelect.disabled = true;
 
+  // checkbox
   semNumero.checked = false;
   numeroInput.disabled = false;
 
