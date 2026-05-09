@@ -21,7 +21,7 @@ function limparMensagem() {
 }
 
 function apenasNumeros(valor) {
-  return valor.replace(new RegExp('[^0-9]', 'g'), '');
+  return valor.replace(/\D/g, '');
 }
 
 function formatarCep(valor) {
@@ -32,6 +32,33 @@ function formatarCep(valor) {
   }
 
   return numeros;
+}
+
+function limparFormulario() {
+  localStorage.removeItem('cadastroUsuario');
+
+  form.reset();
+
+  document.getElementById('nome').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('telefone').value = '';
+  document.getElementById('cep').value = '';
+  document.getElementById('rua').value = '';
+  document.getElementById('numero').value = '';
+  document.getElementById('complemento').value = '';
+  document.getElementById('bairro').value = '';
+  document.getElementById('referencia').value = '';
+
+  estadoSelect.value = '';
+
+  cidadeSelect.innerHTML = '<option value="">Selecione um estado primeiro</option>';
+  cidadeSelect.value = '';
+  cidadeSelect.disabled = true;
+
+  semNumero.checked = false;
+  numeroInput.disabled = false;
+
+  limparMensagem();
 }
 
 async function carregarCidades(uf, cidadeSelecionada = '') {
@@ -115,7 +142,11 @@ telefoneInput.addEventListener('input', () => {
       '-' +
       numeros.slice(7, 11);
   } else if (numeros.length > 2) {
-    telefoneInput.value = '(' + numeros.slice(0, 2) + ') ' + numeros.slice(2);
+    telefoneInput.value =
+      '(' +
+      numeros.slice(0, 2) +
+      ') ' +
+      numeros.slice(2);
   } else if (numeros.length > 0) {
     telefoneInput.value = '(' + numeros;
   } else {
@@ -157,11 +188,13 @@ async function buscarCep(cep) {
 
     if (dados.erro) {
       exibirMensagem('Esse CEP não existe. Por favor, insira o CEP correto.');
+
       document.getElementById('rua').value = '';
       document.getElementById('bairro').value = '';
       estadoSelect.value = '';
       cidadeSelect.innerHTML = '<option value="">Selecione um estado primeiro</option>';
       cidadeSelect.disabled = true;
+
       salvarDados();
       return;
     }
@@ -173,6 +206,7 @@ async function buscarCep(cep) {
     await carregarCidades(dados.uf, dados.localidade);
 
     exibirMensagem('Endereço preenchido automaticamente pelo CEP.', 'success');
+
     salvarDados();
   } catch (erro) {
     console.log('Erro ao buscar CEP:', erro);
@@ -220,42 +254,9 @@ function salvarDados() {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  salvarDados();
-
   successModal.classList.add('show');
 
-  localStorage.removeItem('cadastroUsuario');
-
-  form.reset();
-
-  // limpa inputs
-  document.getElementById('nome').value = '';
-  document.getElementById('email').value = '';
-  document.getElementById('telefone').value = '';
-  document.getElementById('cep').value = '';
-  document.getElementById('rua').value = '';
-  document.getElementById('numero').value = '';
-  document.getElementById('complemento').value = '';
-  document.getElementById('bairro').value = '';
-  document.getElementById('referencia').value = '';
-
-  // limpa selects
-  estadoSelect.selectedIndex = 0;
-
-  cidadeSelect.innerHTML = `
-    <option value="">
-      Selecione um estado primeiro
-    </option>
-  `;
-
-  cidadeSelect.value = '';
-  cidadeSelect.disabled = true;
-
-  // checkbox
-  semNumero.checked = false;
-  numeroInput.disabled = false;
-
-  limparMensagem();
+  limparFormulario();
 });
 
 fecharModal.addEventListener('click', () => {
